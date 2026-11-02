@@ -20,9 +20,7 @@ class DatabaseLoaderTest extends TestCase
         parent::tearDown();
     }
 
-    /**
-     * @test
-     */
+    #[\PHPUnit\Framework\Attributes\Test]
     public function it_returns_from_database()
     {
         $expected = [

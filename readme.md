@@ -3,7 +3,6 @@ Code fork from https://github.com/Waavi/translation
 
 [![Latest Version on Packagist](https://img.shields.io/packagist/v/waavi/translation.svg?style=flat-square)](https://packagist.org/packages/waavi/translation)
 [![Software License](https://img.shields.io/badge/license-MIT-brightgreen.svg?style=flat-square)](LICENSE.md)
-[![Build Status](https://img.shields.io/travis/Waavi/translation/master.svg?style=flat-square)](https://travis-ci.org/Waavi/translation)
 [![Total Downloads](https://img.shields.io/packagist/dt/waavi/translation.svg?style=flat-square)](https://packagist.org/packages/waavi/translation)
 
 ## Introduction
@@ -33,15 +32,17 @@ WAAVI is a web development studio based in Madrid, Spain. You can learn more abo
 
 ## Laravel compatibility
 
- Laravel  | translation
-:---------|:----------
- 4.x  	  | 1.0.x
- 5.0.x    | 2.0.x
- 5.1.x\|5.3.x | 2.1.x
- 5.4.x    | 2.2.x
- 5.5.x    | 2.3.x and higher
- 5.6.x    | 2.3.x and higher
- 6.x\|7.x     | 2.4.x and higher
+Laravel | PHP | Testbench (development)
+:-------|:----|:----------------------
+10.x | 8.1+ | 8.x
+11.x | 8.2+ | 9.x
+12.x | 8.2+ | 10.x
+13.x | 8.3+ | 11.x
+
+Laravel 10 applications should require `doctrine/dbal:^3.6` for legacy schema changes; Laravel 11–13 can use DBAL 4.
+
+This branch supports Laravel 10–13. Composer selects dependencies compatible with your PHP version.
+
 ## Features overview
 
  - Allow dynamic changes to the site's text and translations.
@@ -52,24 +53,24 @@ WAAVI is a web development studio based in Madrid, Spain. You can learn more abo
 
 ## Installation
 
-Require through composer
+Require through Composer:
 
+```sh
+composer require jamesctl/translation
+```
 
-	composer require jamesclt/translation 2.3.x
+For Laravel 11–13, add the provider to `bootstrap/providers.php`:
 
-Or manually edit your composer.json file:
+```php
+return [
+    App\Providers\AppServiceProvider::class,
+    Waavi\Translation\TranslationServiceProvider::class,
+];
+```
 
-	"require": {
-		"jamesclt/translation": "2.3.x"
-	}
+For Laravel 10, add `Waavi\Translation\TranslationServiceProvider::class` to the providers in `config/app.php`.
 
-Once installed, in your project's config/app.php file replace the following entry from the providers array:
-
-	Illuminate\Translation\TranslationServiceProvider::class
-
-with:
-
-	Waavi\Translation\TranslationServiceProvider::class
+The package replaces Laravel's translation loader. Keep the `Waavi\Translation` namespace when using this fork.
 
 Remove your config cache:
 
@@ -89,7 +90,7 @@ You may check the package's configuration file at:
 
 ## Translations source
 
-This package allows you to load translation from the regular Laravel localization files (in /resources/lang), from the database, from cache or in a mix of the previous for development. You may configure the desired mode of operation through the translator.php config file and/or the TRANSLATION_SOURCE environment variable. Accepted values are:
+This package allows you to load translation from the regular Laravel localization files (in the application language directory, normally /lang), from the database, from cache or in a mix of the previous for development. You may configure the desired mode of operation through the translator.php config file and/or the TRANSLATION_SOURCE environment variable. Accepted values are:
 
  - 'files'		To load translations from Laravel's language files (default)
  - 'database'	To load translations from the database
@@ -417,3 +418,10 @@ In your views, for routes where the Middleware is active, you may present the us
     </ul>
 </li>
 ```
+
+## Development
+
+Run `composer update`, then `composer test`. SQLite and PDO SQLite are required for tests.
+GitHub Actions tests Laravel 10–13 with the corresponding Testbench versions.
+Language files and the import command use Laravel's configured `langPath()`,
+including custom paths and existing `resources/lang` applications.

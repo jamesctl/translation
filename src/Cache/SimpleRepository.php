@@ -11,6 +11,8 @@ class SimpleRepository implements CacheRepositoryInterface
      */
     protected $store;
 
+    protected $cacheTag;
+
     /**
      * Create a new cache repository instance.
      *

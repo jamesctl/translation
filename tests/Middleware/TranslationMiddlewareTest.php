@@ -6,9 +6,7 @@ use Waavi\Translation\Test\TestCase;
 
 class TranslationMiddlewareTest extends TestCase
 {
-    /**
-     * @test
-     */
+    #[\PHPUnit\Framework\Attributes\Test]
     public function it_will_redirect_to_default_if_no_locale()
     {
         $response   = $this->call('GET', '/');
@@ -19,9 +17,7 @@ class TranslationMiddlewareTest extends TestCase
         $this->assertEquals('http://localhost/en', $response->headers->get('location'));
     }
 
-    /**
-     * @test
-     */
+    #[\PHPUnit\Framework\Attributes\Test]
     public function it_will_redirect_to_browser_locale_before_default()
     {
         $response   = $this->call('GET', '/', [], [], [], ['HTTP_ACCEPT_LANGUAGE' => 'es']);
@@ -32,9 +28,7 @@ class TranslationMiddlewareTest extends TestCase
         $this->assertEquals('http://localhost/es', $response->headers->get('location'));
     }
 
-    /**
-     * @test
-     */
+    #[\PHPUnit\Framework\Attributes\Test]
     public function it_will_redirect_if_invalid_locale()
     {
         $response   = $this->call('GET', '/ca');
@@ -45,9 +39,7 @@ class TranslationMiddlewareTest extends TestCase
         $this->assertEquals('http://localhost/en/ca', $response->headers->get('location'));
     }
 
-    /**
-     * @test
-     */
+    #[\PHPUnit\Framework\Attributes\Test]
     public function it_will_not_redirect_if_valid_locale()
     {
         $response   = $this->call('GET', '/es');
@@ -57,9 +49,7 @@ class TranslationMiddlewareTest extends TestCase
         $this->assertEquals('Hola mundo', $response->getContent());
     }
 
-    /**
-     *  @test
-     */
+    #[\PHPUnit\Framework\Attributes\Test]
     public function it_will_ignore_post_requests()
     {
         $response   = $this->call('POST', '/');
@@ -69,9 +59,7 @@ class TranslationMiddlewareTest extends TestCase
         $this->assertEquals('POST answer', $response->getContent());
     }
 
-    /**
-     *  @test
-     */
+    #[\PHPUnit\Framework\Attributes\Test]
     public function it_sets_the_app_locale()
     {
         $response = $this->call('GET', '/en/locale');
@@ -80,9 +68,7 @@ class TranslationMiddlewareTest extends TestCase
         $this->assertEquals('es', $response->getContent());
     }
 
-    /**
-     *  @test
-     */
+    #[\PHPUnit\Framework\Attributes\Test]
     public function it_detects_the_app_locale_in_custom_segment()
     {
         $response = $this->call('GET', '/api/v1/en/locale');
@@ -91,9 +77,7 @@ class TranslationMiddlewareTest extends TestCase
         $this->assertEquals('es', $response->getContent());
     }
 
-    /**
-     * @test
-     */
+    #[\PHPUnit\Framework\Attributes\Test]
     public function it_redirects_invalid_locale_in_custom_segment()
     {
         $response   = $this->call('GET', '/api/v1/ca/locale');
@@ -104,9 +88,7 @@ class TranslationMiddlewareTest extends TestCase
         $this->assertEquals('http://localhost/api/v1/en/ca/locale', $response->headers->get('location'));
     }
 
-    /**
-     * @test
-     */
+    #[\PHPUnit\Framework\Attributes\Test]
     public function it_keeps_locale_in_post_requests_with_no_locale_set()
     {
         $translationRepository = \App::make(TranslationRepository::class);

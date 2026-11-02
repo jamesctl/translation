@@ -16,9 +16,7 @@ class LoadTest extends TestCase
         $this->command               = new FileLoaderCommand($this->languageRepository, $this->translationRepository, \App::make('files'), $translationsPath, 'en');
     }
 
-    /**
-     * @test
-     */
+    #[\PHPUnit\Framework\Attributes\Test]
     public function it_loads_files_into_database()
     {
         $file = realpath(__DIR__ . '/../lang/en/auth.php');
@@ -46,9 +44,7 @@ class LoadTest extends TestCase
         $this->assertEquals('Simple', $translations[2]->text);
     }
 
-    /**
-     * @test
-     */
+    #[\PHPUnit\Framework\Attributes\Test]
     public function it_loads_files_in_subdirectories_into_database()
     {
         $directory = realpath(__DIR__ . '/../lang/es');
@@ -70,9 +66,7 @@ class LoadTest extends TestCase
         $this->assertEquals('Identifícate', $translations[1]->text);
     }
 
-    /**
-     * @test
-     */
+    #[\PHPUnit\Framework\Attributes\Test]
     public function it_doesnt_load_undefined_locales()
     {
         $this->command->handle();
@@ -82,9 +76,7 @@ class LoadTest extends TestCase
         $this->assertFalse(in_array('ca', $locales));
     }
 
-    /**
-     * @test
-     */
+    #[\PHPUnit\Framework\Attributes\Test]
     public function it_loads_overwritten_vendor_files_correctly()
     {
         $this->command->handle();
@@ -97,9 +89,7 @@ class LoadTest extends TestCase
         $this->assertEquals('Vendor text', $translations->where('locale', 'en')->where('namespace', 'package')->where('group', 'example')->where('item', 'entry')->first()->text);
     }
 
-    /**
-     *  @test
-     */
+    #[\PHPUnit\Framework\Attributes\Test]
     public function it_doesnt_overwrite_locked_translations()
     {
         $trans = $this->translationRepository->create([
@@ -131,9 +121,7 @@ class LoadTest extends TestCase
         $this->assertEquals('Login', $translations[1]->text);
     }
 
-    /**
-     *  @test
-     */
+    #[\PHPUnit\Framework\Attributes\Test]
     public function it_doesnt_load_empty_arrays()
     {
         $file = realpath(__DIR__ . '/../lang/en/empty.php');

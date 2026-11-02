@@ -14,6 +14,12 @@ class FileLoaderCommand extends Command
      */
     protected $name = 'translator:load';
 
+    protected $languageRepository;
+    protected $translationRepository;
+    protected $path;
+    protected $files;
+    protected $defaultLocale;
+
     /**
      * The console command description.
      *

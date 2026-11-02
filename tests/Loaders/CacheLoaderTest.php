@@ -22,9 +22,7 @@ class CacheLoaderTest extends TestCase
         parent::tearDown();
     }
 
-    /**
-     * @test
-     */
+    #[\PHPUnit\Framework\Attributes\Test]
     public function it_returns_from_cache_if_hit()
     {
         $this->cache->shouldReceive('has')->with('en', 'group', 'name')->once()->andReturn(true);
@@ -32,9 +30,7 @@ class CacheLoaderTest extends TestCase
         $this->assertEquals('cache hit', $this->cacheLoader->loadSource('en', 'group', 'name'));
     }
 
-    /**
-     * @test
-     */
+    #[\PHPUnit\Framework\Attributes\Test]
     public function it_returns_from_fallback_and_stores_in_cache_if_miss()
     {
         $this->cache->shouldReceive('has')->with('en', 'group', 'name')->once()->andReturn(false);

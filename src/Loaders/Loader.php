@@ -14,6 +14,8 @@ abstract class Loader implements LoaderContract
      */
     protected $defaultLocale;
 
+    protected $hints = [];
+
     /**
      *  Create a new loader instance.
      *

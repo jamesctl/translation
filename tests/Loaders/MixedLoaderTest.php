@@ -22,9 +22,7 @@ class MixedLoaderTest extends TestCase
         parent::tearDown();
     }
 
-    /**
-     * @test
-     */
+    #[\PHPUnit\Framework\Attributes\Test]
     public function it_merges_file_and_db()
     {
         $file = [
@@ -45,9 +43,7 @@ class MixedLoaderTest extends TestCase
         $this->assertEquals($expected, $this->mixedLoader->load('en', 'group', 'name'));
     }
 
-    /**
-     * @test
-     */
+    #[\PHPUnit\Framework\Attributes\Test]
     public function it_cascades_namespaces()
     {
         $this->fileLoader->shouldReceive('addNamespace')->with('package', '/some/path/to/package')->andReturnNull();

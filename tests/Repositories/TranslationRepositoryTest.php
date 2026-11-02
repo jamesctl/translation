@@ -15,9 +15,7 @@ class TranslationRepositoryTest extends TestCase
         $this->translationRepository = \App::make(TranslationRepository::class);
     }
 
-    /**
-     * @test
-     */
+    #[\PHPUnit\Framework\Attributes\Test]
     public function test_can_create()
     {
         $translation = $this->translationRepository->create([
@@ -37,9 +35,7 @@ class TranslationRepositoryTest extends TestCase
         $this->assertEquals('text', $translation->text);
     }
 
-    /**
-     * @test
-     */
+    #[\PHPUnit\Framework\Attributes\Test]
     public function test_namespace_is_required()
     {
         $translation = $this->translationRepository->create([
@@ -52,9 +48,7 @@ class TranslationRepositoryTest extends TestCase
         $this->assertNull($translation);
     }
 
-    /**
-     * @test
-     */
+    #[\PHPUnit\Framework\Attributes\Test]
     public function test_locale_is_required()
     {
         $translation = $this->translationRepository->create([
@@ -67,9 +61,7 @@ class TranslationRepositoryTest extends TestCase
         $this->assertNull($translation);
     }
 
-    /**
-     * @test
-     */
+    #[\PHPUnit\Framework\Attributes\Test]
     public function test_group_is_required()
     {
         $translation = $this->translationRepository->create([
@@ -82,9 +74,7 @@ class TranslationRepositoryTest extends TestCase
         $this->assertNull($translation);
     }
 
-    /**
-     * @test
-     */
+    #[\PHPUnit\Framework\Attributes\Test]
     public function test_item_is_required()
     {
         $translation = $this->translationRepository->create([
@@ -97,9 +87,7 @@ class TranslationRepositoryTest extends TestCase
         $this->assertNull($translation);
     }
 
-    /**
-     * @test
-     */
+    #[\PHPUnit\Framework\Attributes\Test]
     public function test_text_not_required()
     {
         $translation = $this->translationRepository->create([
@@ -113,9 +101,7 @@ class TranslationRepositoryTest extends TestCase
         $this->assertTrue($translation->exists());
     }
 
-    /**
-     * @test
-     */
+    #[\PHPUnit\Framework\Attributes\Test]
     public function test_cannot_repeat_same_code_on_same_language()
     {
         $translation = $this->translationRepository->create([
@@ -138,9 +124,7 @@ class TranslationRepositoryTest extends TestCase
         $this->assertNull($translation);
     }
 
-    /**
-     * @test
-     */
+    #[\PHPUnit\Framework\Attributes\Test]
     public function test_update_works()
     {
         $translation = $this->translationRepository->create([
@@ -160,9 +144,7 @@ class TranslationRepositoryTest extends TestCase
         $this->assertFalse($translation->isLocked());
     }
 
-    /**
-     * @test
-     */
+    #[\PHPUnit\Framework\Attributes\Test]
     public function test_update_and_lock()
     {
         $translation = $this->translationRepository->create([
@@ -182,9 +164,7 @@ class TranslationRepositoryTest extends TestCase
         $this->assertTrue($translation->isLocked());
     }
 
-    /**
-     * @test
-     */
+    #[\PHPUnit\Framework\Attributes\Test]
     public function test_update_fails_if_lock()
     {
         $translation = $this->translationRepository->create([
@@ -200,9 +180,7 @@ class TranslationRepositoryTest extends TestCase
         $this->assertFalse($this->translationRepository->update($translation->id, 'new text'));
     }
 
-    /**
-     * @test
-     */
+    #[\PHPUnit\Framework\Attributes\Test]
     public function test_force_update()
     {
         $translation = $this->translationRepository->create([
@@ -224,9 +202,7 @@ class TranslationRepositoryTest extends TestCase
         $this->assertTrue($translation->isLocked());
     }
 
-    /**
-     * @test
-     */
+    #[\PHPUnit\Framework\Attributes\Test]
     public function test_delete()
     {
         $translation = $this->translationRepository->create([
@@ -248,9 +224,7 @@ class TranslationRepositoryTest extends TestCase
         $this->assertEquals(1, $this->translationRepository->count());
     }
 
-    /**
-     * @test
-     */
+    #[\PHPUnit\Framework\Attributes\Test]
     public function it_deletes_other_locales_if_default()
     {
         $translation = $this->translationRepository->create([
@@ -279,9 +253,7 @@ class TranslationRepositoryTest extends TestCase
         $this->assertEquals(1, $this->translationRepository->count());
     }
 
-    /**
-     * @test
-     */
+    #[\PHPUnit\Framework\Attributes\Test]
     public function it_loads_arrays()
     {
         $array = [
@@ -316,9 +288,7 @@ class TranslationRepositoryTest extends TestCase
         $this->assertEquals('metI', $translations[2]->text);
     }
 
-    /**
-     * @test
-     */
+    #[\PHPUnit\Framework\Attributes\Test]
     public function load_arrays_does_not_overwrite_locked_translations()
     {
         $array = [
@@ -343,9 +313,7 @@ class TranslationRepositoryTest extends TestCase
         $this->assertEquals('Complex', $translations[0]->text);
     }
 
-    /**
-     * @test
-     */
+    #[\PHPUnit\Framework\Attributes\Test]
     public function it_picks_a_random_untranslated_entry()
     {
         $array = ['simple' => 'Simple'];
@@ -355,9 +323,7 @@ class TranslationRepositoryTest extends TestCase
         $this->assertNotNull($translation);
     }
 
-    /**
-     * @test
-     */
+    #[\PHPUnit\Framework\Attributes\Test]
     public function it_lists_all_untranslated_entries()
     {
         $array = ['simple' => 'Simple', 'complex' => 'Complex'];
@@ -371,9 +337,7 @@ class TranslationRepositoryTest extends TestCase
         $this->assertEquals('Complex', $translations[0]->text);
     }
 
-    /**
-     * @test
-     */
+    #[\PHPUnit\Framework\Attributes\Test]
     public function it_finds_by_code()
     {
         $array = ['simple' => 'Simple', 'complex' => 'Complex'];
@@ -383,9 +347,7 @@ class TranslationRepositoryTest extends TestCase
         $this->assertEquals('Complex', $translation->text);
     }
 
-    /**
-     * @test
-     */
+    #[\PHPUnit\Framework\Attributes\Test]
     public function it_gets_all_items_in_a_group()
     {
         $array = ['simple' => 'Simple', 'complex' => 'Complex'];
@@ -402,9 +364,7 @@ class TranslationRepositoryTest extends TestCase
         $this->assertEquals('Complex', $translations[0]['text']);
     }
 
-    /**
-     * @test
-     */
+    #[\PHPUnit\Framework\Attributes\Test]
     public function it_flag_as_unstable()
     {
         $array = ['simple' => 'Simple', 'complex' => 'Complex'];
@@ -417,9 +377,7 @@ class TranslationRepositoryTest extends TestCase
         $this->assertEquals('Complex', $translations[0]->text);
     }
 
-    /**
-     * @test
-     */
+    #[\PHPUnit\Framework\Attributes\Test]
     public function it_searches_by_code_fragment()
     {
         $array = ['simple' => 'Simple', 'complex' => 'Complex'];
@@ -433,9 +391,7 @@ class TranslationRepositoryTest extends TestCase
         $this->assertEquals(0, $this->translationRepository->search('es', 'ple.2')->count());
     }
 
-    /**
-     * @test
-     */
+    #[\PHPUnit\Framework\Attributes\Test]
     public function it_translates_text()
     {
         $array = ['lang' => 'Castellano', 'multi' => 'Multiple', 'multi2' => 'Multiple'];
@@ -449,9 +405,7 @@ class TranslationRepositoryTest extends TestCase
         $this->assertEquals(['Multi', 'Many'], $this->translationRepository->translateText('Multiple', 'es', 'en'));
     }
 
-    /**
-     * @test
-     */
+    #[\PHPUnit\Framework\Attributes\Test]
     public function test_flag_as_reviewed()
     {
         $array = ['simple' => 'Simple', 'complex' => 'Complex'];

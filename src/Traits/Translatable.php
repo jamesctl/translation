@@ -13,7 +13,8 @@ trait Translatable
      */
     public static function bootTranslatable()
     {
-        static::observe(new TranslatableObserver);
+        static::saved([TranslatableObserver::class, 'saved']);
+        static::deleted([TranslatableObserver::class, 'deleted']);
     }
 
     /**
@@ -26,7 +27,7 @@ trait Translatable
     {
         // Return the raw value of a translatable attribute if requested
         if ($this->rawValueRequested($attribute)) {
-            $rawAttribute = snake_case(str_replace('raw', '', $attribute));
+            $rawAttribute = Str::snake(str_replace('raw', '', $attribute));
             return $this->attributes[$rawAttribute];
         }
         // Return the translation for the given attribute if available
@@ -97,7 +98,7 @@ trait Translatable
     public function rawValueRequested($attribute)
     {
         if (strrpos($attribute, 'raw') === 0) {
-            $rawAttribute = snake_case(str_replace('raw', '', $attribute));
+            $rawAttribute = Str::snake(str_replace('raw', '', $attribute));
             return $this->isTranslatable($rawAttribute);
         }
         return false;

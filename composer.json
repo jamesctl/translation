@@ -1,6 +1,6 @@
 {
     "name": "jamesctl/translation",
-    "description": "A Translation package for Laravel 11 with database and cache support",
+    "description": "A translation package for Laravel with database and cache support",
     "keywords": [
         "waavi",
         "laravel-translator",
@@ -23,12 +23,13 @@
         }
     ],
     "require": {
-        "laravel/framework": "~10.0|~11.0|~12.0",
-        "doctrine/dbal": "^v4.1.0"
+        "laravel/framework": "^10.0 || ^11.0 || ^12.0 || ^13.0",
+        "doctrine/dbal": "^3.6 || ^4.1",
+        "php": "^8.1"
     },
     "require-dev": {
-        "phpunit/phpunit" : "^11.5.3",
-        "orchestra/testbench": "v9.3.0",
+        "phpunit/phpunit": "^10.5 || ^11.5",
+        "orchestra/testbench": "^8.0 || ^9.0 || ^10.0 || ^11.0",
         "mockery/mockery": "^1.6"
     },
     "autoload": {
@@ -41,7 +42,7 @@
             "Waavi\\Translation\\Test\\": "tests"
         }
     },
-    "minimum-stability": "dev",
+    "minimum-stability": "stable",
     "scripts": {
         "test": "vendor/bin/phpunit"
     }

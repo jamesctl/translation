@@ -14,41 +14,31 @@ class LanguageRepositoryTest extends TestCase
         $this->translationRepository = \App::make(TranslationRepository::class);
     }
 
-    /**
-     * @test
-     */
+    #[\PHPUnit\Framework\Attributes\Test]
     public function test_can_create()
     {
         $this->assertNotNull($this->languageRepository->create(['locale' => 'ca', 'name' => 'Catalan']));
     }
 
-    /**
-     * @test
-     */
+    #[\PHPUnit\Framework\Attributes\Test]
     public function test_has_table()
     {
         $this->assertTrue($this->languageRepository->tableExists());
     }
 
-    /**
-     * @test
-     */
+    #[\PHPUnit\Framework\Attributes\Test]
     public function test_create_disallows_duplicate_locale()
     {
         $this->assertNull($this->languageRepository->create(['locale' => 'en', 'name' => 'Catalan']));
     }
 
-    /**
-     * @test
-     */
+    #[\PHPUnit\Framework\Attributes\Test]
     public function test_create_disallows_duplicate_name()
     {
         $this->assertNull($this->languageRepository->create(['locale' => 'ca', 'name' => 'English']));
     }
 
-    /**
-     * @test
-     */
+    #[\PHPUnit\Framework\Attributes\Test]
     public function test_can_update()
     {
         $this->assertTrue($this->languageRepository->update(['id' => 1, 'locale' => 'ens', 'name' => 'Englishs']));
@@ -57,34 +47,26 @@ class LanguageRepositoryTest extends TestCase
         $this->assertEquals('Englishs', $lang->name);
     }
 
-    /**
-     * @test
-     */
+    #[\PHPUnit\Framework\Attributes\Test]
     public function test_update_disallows_duplicate_locale()
     {
         $this->assertFalse($this->languageRepository->update(['id' => 1, 'locale' => 'es', 'name' => 'Englishs']));
     }
 
-    /**
-     * @test
-     */
+    #[\PHPUnit\Framework\Attributes\Test]
     public function test_update_disallows_duplicate_name()
     {
         $this->assertFalse($this->languageRepository->update(['id' => 1, 'locale' => 'ens', 'name' => 'Spanish']));
     }
 
-    /**
-     * @test
-     */
+    #[\PHPUnit\Framework\Attributes\Test]
     public function it_can_delete()
     {
         $this->languageRepository->delete(2);
         $this->assertEquals(1, $this->languageRepository->all()->count());
     }
 
-    /**
-     * @test
-     */
+    #[\PHPUnit\Framework\Attributes\Test]
     public function it_can_restore()
     {
         $this->languageRepository->delete(2);
@@ -93,9 +75,7 @@ class LanguageRepositoryTest extends TestCase
         $this->assertEquals(2, $this->languageRepository->all()->count());
     }
 
-    /**
-     * @test
-     */
+    #[\PHPUnit\Framework\Attributes\Test]
     public function it_can_find_by_locale()
     {
         $language = $this->languageRepository->findByLocale('es');
@@ -104,9 +84,7 @@ class LanguageRepositoryTest extends TestCase
         $this->assertEquals('Spanish', $language->name);
     }
 
-    /**
-     * @test
-     */
+    #[\PHPUnit\Framework\Attributes\Test]
     public function it_can_find_trashed_by_locale()
     {
         $this->languageRepository->delete(2);
@@ -116,9 +94,7 @@ class LanguageRepositoryTest extends TestCase
         $this->assertEquals('Spanish', $language->name);
     }
 
-    /**
-     * @test
-     */
+    #[\PHPUnit\Framework\Attributes\Test]
     public function it_can_find_all_except_one()
     {
         $this->languageRepository->create(['locale' => 'ca', 'name' => 'Catalan']);
@@ -132,26 +108,20 @@ class LanguageRepositoryTest extends TestCase
         $this->assertEquals('Catalan', $languages[1]->name);
     }
 
-    /**
-     * @test
-     */
+    #[\PHPUnit\Framework\Attributes\Test]
     public function it_can_get_a_list_of_all_available_locales()
     {
         $this->assertEquals(['en', 'es'], $this->languageRepository->availableLocales());
     }
 
-    /**
-     * @test
-     */
+    #[\PHPUnit\Framework\Attributes\Test]
     public function it_can_check_a_locale_exists()
     {
         $this->assertTrue($this->languageRepository->isValidLocale('es'));
         $this->assertFalse($this->languageRepository->isValidLocale('ca'));
     }
 
-    /**
-     * @test
-     */
+    #[\PHPUnit\Framework\Attributes\Test]
     public function it_can_calculate_the_percent_translated()
     {
         $this->assertEquals(0, $this->languageRepository->percentTranslated('es'));

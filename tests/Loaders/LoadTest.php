@@ -21,9 +21,7 @@ class LoadTest extends TestCase
         parent::tearDown();
     }
 
-    /**
-     * @test
-     */
+    #[\PHPUnit\Framework\Attributes\Test]
     public function it_merges_default_and_target_locales()
     {
         $en = [
