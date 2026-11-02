@@ -104,21 +104,21 @@ class LoadTest extends TestCase
 
         $file = realpath(__DIR__ . '/../lang/en/auth.php');
         $this->command->loadFile($file, 'en');
-        $translations = $this->translationRepository->all();
+        $translations = $this->translationRepository->all()->keyBy('item');
 
         $this->assertEquals(3, $translations->count());
 
-        $this->assertEquals('en', $translations[0]->locale);
-        $this->assertEquals('*', $translations[0]->namespace);
-        $this->assertEquals('auth', $translations[0]->group);
-        $this->assertEquals('login.label', $translations[0]->item);
-        $this->assertEquals('No override', $translations[0]->text);
+        $this->assertEquals('en', $translations['login.label']->locale);
+        $this->assertEquals('*', $translations['login.label']->namespace);
+        $this->assertEquals('auth', $translations['login.label']->group);
+        $this->assertEquals('login.label', $translations['login.label']->item);
+        $this->assertEquals('No override', $translations['login.label']->text);
 
-        $this->assertEquals('en', $translations[1]->locale);
-        $this->assertEquals('*', $translations[1]->namespace);
-        $this->assertEquals('auth', $translations[1]->group);
-        $this->assertEquals('login.action', $translations[1]->item);
-        $this->assertEquals('Login', $translations[1]->text);
+        $this->assertEquals('en', $translations['login.action']->locale);
+        $this->assertEquals('*', $translations['login.action']->namespace);
+        $this->assertEquals('auth', $translations['login.action']->group);
+        $this->assertEquals('login.action', $translations['login.action']->item);
+        $this->assertEquals('Login', $translations['login.action']->text);
     }
 
     #[\PHPUnit\Framework\Attributes\Test]

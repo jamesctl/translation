@@ -14,7 +14,7 @@ class CreateTranslationsTable extends Migration
     {
         Schema::connection(config('translator.connection'))->create('translator_translations', function ($table) {
             $table->increments('id');
-            $table->string('locale', 6);
+            $table->string('locale', 20)->nullable(false);;
             $table->string('namespace', 150)->default('*');
             $table->string('group', 150);
             $table->string('item', 150);
@@ -22,7 +22,7 @@ class CreateTranslationsTable extends Migration
             $table->boolean('unstable')->default(false);
             $table->boolean('locked')->default(false);
             $table->timestamps();
-            $table->foreign('locale')->references('locale')->on('translator_languages');
+           // $table->foreign('locale')->references('locale')->on('translator_languages');
             $table->unique(['locale', 'namespace', 'group', 'item']);
         });
     }

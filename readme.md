@@ -1,9 +1,9 @@
-Code fork from https://github.com/Waavi/translation
+Code forked from https://github.com/Waavi/translation
 # Better localization management for Laravel
 
-[![Latest Version on Packagist](https://img.shields.io/packagist/v/waavi/translation.svg?style=flat-square)](https://packagist.org/packages/waavi/translation)
+[![Latest Version on Packagist](https://img.shields.io/packagist/v/jamesctl/translation.svg?style=flat-square)](https://packagist.org/packages/jamesctl/translation)
 [![Software License](https://img.shields.io/badge/license-MIT-brightgreen.svg?style=flat-square)](LICENSE.md)
-[![Total Downloads](https://img.shields.io/packagist/dt/waavi/translation.svg?style=flat-square)](https://packagist.org/packages/waavi/translation)
+[![Total Downloads](https://img.shields.io/packagist/dt/jamesctl/translation.svg?style=flat-square)](https://packagist.org/packages/jamesctl/translation)
 
 ## Introduction
 
